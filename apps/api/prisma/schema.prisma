@@ -26,6 +26,7 @@ model User {
   couponsEvent   Coupons[]
   transactions   Transaction[]
   reviews        Review[]
+  ReferralPoint  ReferralPoint[]
 }
 
 model Event {
@@ -59,6 +60,8 @@ model ReferralPoint {
   created_at      DateTime  @default(now())
   expiration_date DateTime?
   referrer        User      @relation("ReferrerToReferralPoint", fields: [referrer_id], references: [id])
+  User            User?     @relation(fields: [userId], references: [id])
+  userId          Int?
 }
 
 model Coupons {

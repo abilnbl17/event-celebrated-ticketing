@@ -19,11 +19,14 @@ import path from 'path';
 import { ImageRouter } from './routers/getImage.router';
 import { TicketRouter } from './routers/ticket.router';
 import { OrganizerRouter } from './routers/organizer.router';
+import { AuthRouter } from './routers/auth.router';
+import { EventRouter } from './routers/event.router';
 
 export default class App {
   readonly app: Express;
 
   constructor() {
+    // menggunakan execute otomatis ketika digunakan
     this.app = express();
     this.configure();
     this.routes();
@@ -60,6 +63,7 @@ export default class App {
   }
 
   private routes(): void {
+
     this.app.get('/', (req: Request, res: Response) => {
       return res.status(200).send(`<h1>Hello, Purwadhika Student !</h1>`);
     });
@@ -75,6 +79,15 @@ export default class App {
     const ticketRouter = new TicketRouter();
     const organizerRouter = new OrganizerRouter();
     const imageRouter = new ImageRouter();
+    const authRouter = new AuthRouter();
+    const eventRouter = new EventRouter();
+
+    // Abil Code Open
+    this.app.use('/event', eventRouter.getRouter());
+    this.app.use('/auth', authRouter.getRouter());
+  }
+  // Abil code Close
+
 
     this.app.use('/event/discovery', discoveryRouter.getRouter());
     this.app.use('/event/createEvent', createEventRouter.getRouter());
