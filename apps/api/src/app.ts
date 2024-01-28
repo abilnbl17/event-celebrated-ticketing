@@ -63,12 +63,10 @@ export default class App {
   }
 
   private routes(): void {
-
     this.app.get('/', (req: Request, res: Response) => {
       return res.status(200).send(`<h1>Hello, Purwadhika Student !</h1>`);
     });
 
-    //IQBAL OPEN TASK//
     const discoveryRouter = new DiscoveryRouter();
     const createEventRouter = new CreateEventRouter();
     const categoryRouter = new CategoryRouter();
@@ -85,10 +83,8 @@ export default class App {
     // Abil Code Open
     this.app.use('/event', eventRouter.getRouter());
     this.app.use('/auth', authRouter.getRouter());
-  }
-  // Abil code Close
-
-
+    // Abil code Close
+    // iqbal code open
     this.app.use('/event/discovery', discoveryRouter.getRouter());
     this.app.use('/event/createEvent', createEventRouter.getRouter());
     this.app.use('/categories', categoryRouter.getRouter());
@@ -103,8 +99,9 @@ export default class App {
       express.static(path.join(__dirname, '../../public/image')),
       imageRouter.getRouter(),
     );
+    // iqbal code close
   }
-  //IQBAL CLOSED TASK//
+
   public start(): void {
     this.app.listen(PORT, () => {
       console.log(`  ➜  [API] Local:   http://localhost:${PORT}/`);
