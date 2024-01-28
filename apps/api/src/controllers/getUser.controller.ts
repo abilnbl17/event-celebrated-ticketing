@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 export class GetUserController {
   async getUserEmail(req: Request, res: Response) {
     try {
-      const userIdFromToken = req.dataUser;
+      const userIdFromToken = req.userData;
       const getEmail = await prisma.user.findUnique({
         where: { id: userIdFromToken },
         select: { email: true },
@@ -20,7 +20,7 @@ export class GetUserController {
 
   async getUserRole(req: Request, res: Response) {
     try {
-      const userIdFromToken = req.dataUser;
+      const userIdFromToken = req.userData;
       const role = await prisma.user.findUnique({
         where: { id: userIdFromToken },
         select: { role: true },

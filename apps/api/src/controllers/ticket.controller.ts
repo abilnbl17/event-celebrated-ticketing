@@ -15,7 +15,7 @@ export class TicketController {
       const pageNumber = parseInt(page || '1');
       const skip = (pageNumber - 1) * pageSize;
 
-      const userIdFromToken = req.dataUser;
+      const userIdFromToken = req.userData;
 
       let events;
 

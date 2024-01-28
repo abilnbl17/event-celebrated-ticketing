@@ -4,7 +4,7 @@ import prisma from '../prisma';
 export class CreateEventController {
   async createEvent(req: Request, res: Response) {
     try {
-      const userIdFromToken = req.dataUser;
+      const userIdFromToken = req.userData;
       const organizerId = await prisma.user.findUnique({
         where: { id: userIdFromToken },
         select: { id: true },
