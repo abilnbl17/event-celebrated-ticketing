@@ -10,12 +10,131 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Sample {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// Prisma schema for your tables
 
-  @@map("samples") // if you want to use snake_case format
+model User {
+  id             Int             @id @default(autoincrement())
+  user_name      String          @unique
+  email          String          @unique
+  password       String
+  referral_code  String
+  role           Role            @default(PARTICIPANT)
+  created_at     DateTime        @default(now())
+  updated_at     DateTime?
+  events         Event[]
+  referrerPoints ReferralPoint[] @relation("ReferrerToReferralPoint")
+  couponsEvent   Coupons[]
+  transactions   Transaction[]
+  reviews        Review[]
+  ReferralPoint  ReferralPoint[]
+}
+
+model Event {
+  id           Int           @id @default(autoincrement())
+  organizer_id Int
+  organizer    String
+  title        String
+  price        Decimal       @default(0)
+  date_time    DateTime
+  end_time     DateTime
+  location     String
+  description  String
+  seats        Int
+  is_free      Boolean?
+  is_online    Boolean?
+  category     Category
+  image        String
+  created_at   DateTime      @default(now())
+  updated_at   DateTime?
+  organizerId  User          @relation(fields: [organizer_id], references: [id])
+  Coupons      Coupons[]
+  transactions Transaction[]
+  reviews      Review[]
+}
+
+model ReferralPoint {
+  id          Int @id @default(autoincrement())
+  referrer_id Int
+
+  points          Int       @default(10000)
+  claim_points    Boolean   @default(false)
+  created_at      DateTime  @default(now())
+  expiration_date DateTime?
+  referrer        User      @relation("ReferrerToReferralPoint", fields: [referrer_id], references: [id])
+  User            User?     @relation(fields: [userId], references: [id])
+  userId          Int?
+}
+
+model Coupons {
+  id              Int           @id @default(autoincrement())
+  user_id         Int?
+  event_id        Int?
+  name            String
+  discount_amount Decimal
+  is_used         Boolean       @default(false)
+  usage_limit     Int
+  created_at      DateTime      @default(now())
+  expiration_date DateTime?
+  user            User?         @relation(fields: [user_id], references: [id])
+  event           Event?        @relation(fields: [event_id], references: [id])
+  transaction     Transaction[]
+}
+
+model Transaction {
+  id              Int    @id @default(autoincrement())
+  user_id         Int
+  event_id        Int
+  coupon_event_id Int?
+  points_used     Int    @default(0)
+  totalamount     Int    @default(0) // Tambahkan kolom totalamount
+  status          Status @default(waitingForPayment) // Tambahkan kolom status
+
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id])
+  event      Event    @relation(fields: [event_id], references: [id])
+  Coupons    Coupons? @relation(fields: [coupon_event_id], references: [id])
+}
+
+enum Status {
+  waitingForPayment
+  success
+  cancel
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  event_id   Int
+  rating     Int
+  feedback   String
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id])
+  event      Event    @relation(fields: [event_id], references: [id])
+}
+
+enum Role {
+  PARTICIPANT
+  ORGANIZER
+}
+
+enum Category {
+  music
+  seminar
+  Sports
+  Technology
+  Arts
+  Food
+  Health
+  Business
+  Science
+  Travel
+  Family
+  Hobbies
+  Charity
+  Community
+  Film
+  Fashion
+  Holiday
+  Lifestyle
+  Other
 }
