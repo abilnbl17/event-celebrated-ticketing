@@ -53,9 +53,8 @@ model Event {
 }
 
 model ReferralPoint {
-  id          Int @id @default(autoincrement())
-  referrer_id Int
-
+  id              Int       @id @default(autoincrement())
+  referrer_id     Int
   points          Int       @default(10000)
   claim_points    Boolean   @default(false)
   created_at      DateTime  @default(now())
