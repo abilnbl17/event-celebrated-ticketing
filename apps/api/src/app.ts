@@ -83,8 +83,7 @@ export default class App {
     //Abil Code Open
     this.app.use('/event', eventRouter.getRouter());
     this.app.use('/auth', authRouter.getRouter());
-    //Abil Code Close
-    //iqbal code open
+    //Abil code Close
     this.app.use('/event/discovery', discoveryRouter.getRouter());
     this.app.use('/event/createEvent', createEventRouter.getRouter());
     this.app.use('/categories', categoryRouter.getRouter());
@@ -99,7 +98,6 @@ export default class App {
       express.static(path.join(__dirname, '../../public/image')),
       imageRouter.getRouter(),
     );
-    //iqbal code close
   }
 
   public start(): void {
