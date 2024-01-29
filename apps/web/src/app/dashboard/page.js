@@ -1,5 +1,7 @@
-// import React from "react";
-// import { TEChart } from "tw-elements-react";
+'use client';
+
+import React from 'react';
+// import { TEChart } from 'tw-elements-react';
 
 // export default function ChartLine(): JSX.Element {
 //   return (
@@ -25,7 +27,7 @@
 //     />
 //   );
 // }
-export default function dashboardPage() {
+export default function DashboardPage() {
   return (
     <div>
       <nav class="bg-white border-b border-gray-200 fixed z-30 w-full">
@@ -874,7 +876,7 @@ export default function dashboardPage() {
                                 <div class="w-full bg-gray-200 rounded-sm h-2">
                                   <div
                                     class="bg-cyan-600 h-2 rounded-sm"
-                                    style="width: 30%"
+                                    // style="width: 30%"
                                   ></div>
                                 </div>
                               </div>
@@ -895,7 +897,7 @@ export default function dashboardPage() {
                                 <div class="w-full bg-gray-200 rounded-sm h-2">
                                   <div
                                     class="bg-orange-300 h-2 rounded-sm"
-                                    style="width: 24%"
+                                    // style="width: 24%"
                                   ></div>
                                 </div>
                               </div>
@@ -916,7 +918,7 @@ export default function dashboardPage() {
                                 <div class="w-full bg-gray-200 rounded-sm h-2">
                                   <div
                                     class="bg-teal-400 h-2 rounded-sm"
-                                    style="width: 18%"
+                                    // style="width: 18%"
                                   ></div>
                                 </div>
                               </div>
@@ -937,7 +939,7 @@ export default function dashboardPage() {
                                 <div class="w-full bg-gray-200 rounded-sm h-2">
                                   <div
                                     class="bg-pink-600 h-2 rounded-sm"
-                                    style="width: 12%"
+                                    // style="width:12%"
                                   ></div>
                                 </div>
                               </div>
@@ -958,7 +960,7 @@ export default function dashboardPage() {
                                 <div class="w-full bg-gray-200 rounded-sm h-2">
                                   <div
                                     class="bg-indigo-600 h-2 rounded-sm"
-                                    style="width: 9%"
+                                    // style="width: 9%"
                                   ></div>
                                 </div>
                               </div>
@@ -979,7 +981,7 @@ export default function dashboardPage() {
                                 <div class="w-full bg-gray-200 rounded-sm h-2">
                                   <div
                                     class="bg-purple-500 h-2 rounded-sm"
-                                    style="width: 7%"
+                                    // style="width: 7%"
                                   ></div>
                                 </div>
                               </div>
