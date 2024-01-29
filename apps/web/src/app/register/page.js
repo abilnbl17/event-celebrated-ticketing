@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Formik, Form, ErrorMessage, Field, useFormik } from 'formik';
 import * as Yup from 'yup';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [user_name, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +14,7 @@ export default function LoginPage() {
   const [role, setRole] = useState('');
 
   const router = useRouter();
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
       const response = await axios.post('http://localhost:8000/auth/register', {
         user_name: user_name,
@@ -23,10 +23,8 @@ export default function LoginPage() {
         referral_code: referral_code,
         role: role,
       });
-      const { token } = response.data;
-      localStorage.setItem('token', token);
 
-      router.push('/');
+      router.push('/login');
       if (response.status === 200) {
         console.log('register Success');
       }
@@ -55,6 +53,18 @@ export default function LoginPage() {
         <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">
           Register
         </h1>
+        {/* <!-- username input --> */}
+        <div class="w-3/4 mb-6">
+          <input
+            value={user_name}
+            type="user_name"
+            name="username"
+            id="user_name"
+            class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
         {/* <!-- email input --> */}
         <div class="w-3/4 mb-6">
           <input
@@ -79,6 +89,30 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {/* <!-- referral Code --> */}
+        <div class="w-3/4 mb-6">
+          <input
+            value={referral_code}
+            type="referral_code"
+            name="referral code"
+            id="referral_code"
+            class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
+            placeholder="referral code"
+            onChange={(e) => setreferral(e.target.value)}
+          />
+        </div>
+        {/* <!-- Role input --> */}
+        <div class="w-3/4 mb-6">
+          <input
+            value={role}
+            type="role"
+            name="role"
+            id="role"
+            class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
+            placeholder="role"
+            onChange={(e) => setRole(e.target.value)}
+          />
+        </div>
         {/* <!-- remember input --> */}
         <div class="w-3/4 flex flex-row justify-between">
           <div class=" flex items-center gap-x-1">
@@ -96,12 +130,12 @@ export default function LoginPage() {
         {/* <!-- button --> */}
         <div class="w-3/4 mt-4">
           <button
-            onClick={handleLogin}
+            onClick={handleRegister}
             type="button"
             class="py-4 bg-blue-400 w-full rounded text-blue-50 font-bold hover:bg-blue-700"
           >
             {/* {' '} */}
-            LOGIN
+            Register
           </button>
         </div>
       </div>
